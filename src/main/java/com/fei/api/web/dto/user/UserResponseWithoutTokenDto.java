@@ -8,11 +8,10 @@ import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor
-public class UserResponseDto {
+public class UserResponseWithoutTokenDto {
 
     private LocalDateTime modifiedDate;
     private LocalDateTime createdDate;
-    private final String token;
     private final Long id;
     private final String userId;
     private final String role;
@@ -27,12 +26,11 @@ public class UserResponseDto {
     private String content;
     private int issueCount;
 
-    public UserResponseDto(User user, String token) {
+    public UserResponseWithoutTokenDto(User user) {
         this.createdDate = user.getCreatedDate();
         this.modifiedDate = user.getModifiedDate();
         this.id = user.getId();
         this.userId = user.getUserId();
-        this.token = token;
         this.role = user.getRole();
         this.email = user.getEmail();
         this.language = user.getLanguage();

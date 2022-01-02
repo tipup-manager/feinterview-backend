@@ -11,20 +11,27 @@ public class UserLoginRequestDto {
 
     private String userId;
     private String pw;
+    private String loginType;
+    private String oauthId;
 
     @Builder
     public UserLoginRequestDto(
             String userId,
-            String pw
+            String pw,
+            String loginType,
+            String oauthId
     ) {
         this.userId = userId;
         this.pw = pw;
+        this.loginType = loginType;
+        this.oauthId = oauthId;
     }
 
     public User toEntity() {
         return User.builder()
                 .userId(userId)
                 .pw(pw)
+                .oauthId(oauthId)
                 .build();
 
     }

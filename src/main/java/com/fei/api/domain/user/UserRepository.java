@@ -9,7 +9,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUserId(String userId);
     Boolean existsByUserId(String userId);
-    User findByUserIdAndPw(String userId, String pw);
+    User findByOauthId(String oauthId);
 
     @Query(nativeQuery = true, value="SELECT * FROM user c")
     Page<User> findUserList(Pageable pageable);

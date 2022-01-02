@@ -25,7 +25,7 @@ public class TokenProvider {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .setSubject(user.getUserId())
-                .setIssuer("financial")
+                .setIssuer("fei")
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
                 .compact();

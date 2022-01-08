@@ -26,6 +26,7 @@ public class Blog extends BaseTimeEntity {
     @Column
     private String title;
 
+    @Lob
     @Column
     private String content;
 
@@ -39,12 +40,6 @@ public class Blog extends BaseTimeEntity {
     private int starCount;
 
     @Column
-    private String addIds;
-
-    @Column
-    private String scrapIds;
-
-    @Column
     private String isFree;
 
     @Column
@@ -52,6 +47,12 @@ public class Blog extends BaseTimeEntity {
 
     @Column
     private String badges;
+
+    @Column
+    private String category;
+
+    @Column
+    private String mainImg;
 
     @Builder
     public Blog(
@@ -62,11 +63,11 @@ public class Blog extends BaseTimeEntity {
         String userImg,
         int starCount,
         String starCountInfo,
-        String addIds,
-        String scrapIds,
         String isFree,
         int price,
-        String badges
+        String badges,
+        String category,
+        String mainImg
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -75,11 +76,11 @@ public class Blog extends BaseTimeEntity {
         this.content = content;
         this.starCount = starCount;
         this.starCountInfo = starCountInfo;
-        this.addIds = addIds;
-        this.scrapIds = scrapIds;
         this.isFree = isFree;
         this.price = price;
         this.badges = badges;
+        this.category = category;
+        this.mainImg = mainImg;
     }
 
     public Blog update(Blog blog) {

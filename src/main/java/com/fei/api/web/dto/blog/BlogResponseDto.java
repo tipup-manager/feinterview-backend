@@ -20,11 +20,11 @@ public class BlogResponseDto {
     private String userImg;
     private String starCountInfo;
     private int starCount;
-    private String addIds;
-    private String scrapIds;
     private String isFree;
     private int price;
     private String badges;
+    private String category;
+    private String mainImg;
 
     public BlogResponseDto(Blog blog) {
         this.createdDate = blog.getCreatedDate();
@@ -34,13 +34,13 @@ public class BlogResponseDto {
         this.userImg = blog.getUserImg();
         this.starCount = blog.getStarCount();
         this.starCountInfo = blog.getStarCountInfo();
-        this.addIds = blog.getAddIds();
-        this.scrapIds = blog.getScrapIds();
         this.isFree = blog.getIsFree();
         this.price = blog.getPrice();
         this.badges = blog.getBadges();
         this.id = blog.getId();
         this.title = blog.getTitle();
         this.content = blog.getContent();
+        this.category = blog.getCategory();
+        this.mainImg = blog.getMainImg();
     }
 }

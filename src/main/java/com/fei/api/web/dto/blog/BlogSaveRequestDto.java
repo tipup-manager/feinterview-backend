@@ -16,11 +16,11 @@ public class BlogSaveRequestDto {
     private String userImg;
     private String starCountInfo;
     private int starCount;
-    private String addIds;
-    private String scrapIds;
     private String isFree;
     private int price;
     private String badges;
+    private String category;
+    private String mainImg;
 
     @Builder
     public BlogSaveRequestDto(
@@ -31,11 +31,11 @@ public class BlogSaveRequestDto {
             String userImg,
             int starCount,
             String starCountInfo,
-            String addIds,
-            String scrapIds,
             String isFree,
             int price,
-            String badges
+            String badges,
+            String category,
+            String mainImg
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -44,11 +44,11 @@ public class BlogSaveRequestDto {
         this.content = content;
         this.starCount = starCount;
         this.starCountInfo = starCountInfo;
-        this.addIds = addIds;
-        this.scrapIds = scrapIds;
         this.isFree = isFree;
         this.price = price;
         this.badges = badges;
+        this.category = category;
+        this.mainImg = mainImg;
     }
 
     public Blog toEntity() {
@@ -60,11 +60,11 @@ public class BlogSaveRequestDto {
                 .userImg(userImg)
                 .starCount(starCount)
                 .starCountInfo(starCountInfo)
-                .addIds(addIds)
-                .scrapIds(scrapIds)
                 .isFree(isFree)
                 .price(price)
                 .badges(badges)
+                .category(category)
+                .mainImg(mainImg)
                 .build();
 
     }

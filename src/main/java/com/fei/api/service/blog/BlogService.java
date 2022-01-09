@@ -2,18 +2,18 @@ package com.fei.api.service.blog;
 
 import com.fei.api.domain.blog.Blog;
 import com.fei.api.domain.blog.BlogRepository;
-import com.fei.api.domain.user.User;
 import com.fei.api.web.dto.blog.BlogListResponseDto;
 import com.fei.api.web.dto.blog.BlogResponseDto;
 import com.fei.api.web.dto.blog.BlogSaveRequestDto;
-import com.fei.api.web.dto.user.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -36,6 +36,14 @@ public class BlogService {
                 () -> new IllegalArgumentException("해당 블로그가 없습니다.id="+id)
         );
         return new BlogResponseDto(blog);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<BlogResponseDto> getBlogByCategory(String category) {
+        return blogRepository.findByCategoryOrderByCreatedDateDesc(category).stream()
+                .map(BlogResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     @Transactional

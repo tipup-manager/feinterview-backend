@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -20,6 +22,11 @@ public class BlogController {
     @GetMapping("/api/v1/blog/{id}")
     public BlogResponseDto getBlog(@PathVariable Long id) {
         return blogService.getBlog(id);
+    }
+
+    @GetMapping("/api/v1/blog/category/{category}")
+    public List<BlogResponseDto> getBlogByCategory(@PathVariable String category) {
+        return blogService.getBlogByCategory(category);
     }
 
     @PostMapping("/api/v1/blog")

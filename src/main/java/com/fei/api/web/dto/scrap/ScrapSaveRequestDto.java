@@ -1,6 +1,5 @@
 package com.fei.api.web.dto.scrap;
 
-import com.fei.api.domain.blog.Blog;
 import com.fei.api.domain.scrap.Scrap;
 import lombok.Builder;
 import lombok.Getter;

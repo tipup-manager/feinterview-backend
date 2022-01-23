@@ -1,12 +1,7 @@
 package com.fei.api.service.scrap;
 
-import com.fei.api.domain.blog.Blog;
-import com.fei.api.domain.blog.BlogRepository;
 import com.fei.api.domain.scrap.Scrap;
 import com.fei.api.domain.scrap.ScrapRepository;
-import com.fei.api.web.dto.blog.BlogListResponseDto;
-import com.fei.api.web.dto.blog.BlogResponseDto;
-import com.fei.api.web.dto.blog.BlogSaveRequestDto;
 import com.fei.api.web.dto.scrap.ScrapListResponseDto;
 import com.fei.api.web.dto.scrap.ScrapResponseDto;
 import com.fei.api.web.dto.scrap.ScrapSaveRequestDto;

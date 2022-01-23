@@ -1,4 +1,4 @@
-package com.fei.api.domain.blog;
+package com.fei.api.domain.post;
 
 
 import com.fei.api.domain.BaseTimeEntity;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Blog extends BaseTimeEntity {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +55,7 @@ public class Blog extends BaseTimeEntity {
     private String mainImg;
 
     @Builder
-    public Blog(
+    public Post(
         String userId,
         Long userNumberId,
         String title,
@@ -83,9 +83,9 @@ public class Blog extends BaseTimeEntity {
         this.mainImg = mainImg;
     }
 
-    public Blog update(Blog blog) {
-        this.title = blog.getTitle();
-        this.content = blog.getContent();
+    public Post update(Post post) {
+        this.title = post.getTitle();
+        this.content = post.getContent();
         return this;
     }
 }

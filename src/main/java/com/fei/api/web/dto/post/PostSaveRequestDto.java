@@ -1,13 +1,13 @@
-package com.fei.api.web.dto.blog;
+package com.fei.api.web.dto.post;
 
-import com.fei.api.domain.blog.Blog;
+import com.fei.api.domain.post.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class BlogSaveRequestDto {
+public class PostSaveRequestDto {
 
     private String userId;
     private Long userNumberId;
@@ -23,7 +23,7 @@ public class BlogSaveRequestDto {
     private String mainImg;
 
     @Builder
-    public BlogSaveRequestDto(
+    public PostSaveRequestDto(
             String userId,
             Long userNumberId,
             String title,
@@ -51,8 +51,8 @@ public class BlogSaveRequestDto {
         this.mainImg = mainImg;
     }
 
-    public Blog toEntity() {
-        return Blog.builder()
+    public Post toEntity() {
+        return Post.builder()
                 .userId(userId)
                 .userNumberId(userNumberId)
                 .content(content)

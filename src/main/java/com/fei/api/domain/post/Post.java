@@ -54,6 +54,9 @@ public class Post extends BaseTimeEntity {
     @Column
     private String mainImg;
 
+    @Column
+    private String isActive;
+
     @Builder
     public Post(
         String userId,
@@ -67,7 +70,8 @@ public class Post extends BaseTimeEntity {
         int price,
         String badges,
         String category,
-        String mainImg
+        String mainImg,
+        String isActive
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -81,6 +85,7 @@ public class Post extends BaseTimeEntity {
         this.badges = badges;
         this.category = category;
         this.mainImg = mainImg;
+        this.isActive = isActive;
     }
 
     public Post update(Post post) {

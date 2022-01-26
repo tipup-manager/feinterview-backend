@@ -49,7 +49,7 @@ public class UserService {
             String token = tokenProvider.create(user);
             return new UserResponseDto(user, token);
         } else {
-            throw new RuntimeException("해당 아이디가 없습니다.");
+            throw new RuntimeException("해당 아이디가 존재하지 않습니다.");
         }
     }
 

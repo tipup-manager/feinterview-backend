@@ -25,8 +25,9 @@ public class PostController {
     }
 
     @GetMapping("/api/v1/post/category/{category}")
-    public List<PostResponseDto> getPostByCategory(@PathVariable String category) {
-        return postService.getPostByCategory(category);
+    public PostListResponseDto getPostByCategory(@PathVariable String category, @RequestParam(defaultValue = "0") int page) {
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
+        return postService.getPostByCategory(category, sortedByModifiedDateDesc);
     }
 
     @PostMapping("/api/v1/post")

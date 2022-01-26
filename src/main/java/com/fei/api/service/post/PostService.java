@@ -2,6 +2,8 @@ package com.fei.api.service.post;
 
 import com.fei.api.domain.post.Post;
 import com.fei.api.domain.post.PostRepository;
+import com.fei.api.domain.user.User;
+import com.fei.api.domain.user.UserRepository;
 import com.fei.api.web.dto.post.PostListResponseDto;
 import com.fei.api.web.dto.post.PostResponseDto;
 import com.fei.api.web.dto.post.PostSaveRequestDto;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public PostResponseDto save(PostSaveRequestDto postSaveRequestDto) {
@@ -28,22 +31,34 @@ public class PostService {
             throw new RuntimeException("Invalid argument");
         }
         Post post = postRepository.save(postSaveRequestDto.toEntity());
-        return new PostResponseDto(post);
+        return new PostResponseDto(post, null, null, null, null);
     }
     @Transactional
     public PostResponseDto getPost(Long id) {
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 블로그가 없습니다.id="+id)
         );
-        return new PostResponseDto(post);
+        User user = userRepository.findById(post.getUserNumberId()).orElseThrow(
+                () -> new IllegalArgumentException("해당 사용자가 없습니다.id="+id)
+        );
+        return new PostResponseDto(
+            post,
+            user.getTitle(),
+            user.getEmail(),
+            user.getHomePageUrl(),
+            user.getGithubUrl()
+        );
     }
 
 
     @Transactional(readOnly = true)
-    public List<PostResponseDto> getPostByCategory(String category) {
-        return postRepository.findByCategoryOrderByCreatedDateDesc(category).stream()
-                .map(PostResponseDto::new)
-                .collect(Collectors.toList());
+    public PostListResponseDto getPostByCategory(String category, Pageable pageable) {
+        Page<Post> pageData = postRepository.findByCategory(category, pageable);
+        return new PostListResponseDto(
+                pageData.getContent(),
+                pageData.getTotalElements(),
+                pageData.getPageable().getPageNumber()
+        );
     }
 
     @Transactional

@@ -21,6 +21,7 @@ public class PostSaveRequestDto {
     private String badges;
     private String category;
     private String mainImg;
+    private String isActive;
 
     @Builder
     public PostSaveRequestDto(
@@ -35,7 +36,8 @@ public class PostSaveRequestDto {
             int price,
             String badges,
             String category,
-            String mainImg
+            String mainImg,
+            String isActive
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -49,6 +51,7 @@ public class PostSaveRequestDto {
         this.badges = badges;
         this.category = category;
         this.mainImg = mainImg;
+        this.isActive = isActive;
     }
 
     public Post toEntity() {
@@ -65,6 +68,7 @@ public class PostSaveRequestDto {
                 .badges(badges)
                 .category(category)
                 .mainImg(mainImg)
+                .isActive(isActive)
                 .build();
 
     }

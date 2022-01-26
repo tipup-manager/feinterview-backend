@@ -25,8 +25,14 @@ public class PostResponseDto {
     private String badges;
     private String category;
     private String mainImg;
+    private String isActive;
+    private String userTitle;
+    private String email;
+    private String homePageUrl;
+    private String github;
 
-    public PostResponseDto(Post post) {
+
+    public PostResponseDto(Post post, String title, String email, String homePageUrl, String github) {
         this.createdDate = post.getCreatedDate();
         this.modifiedDate = post.getModifiedDate();
         this.userId = post.getUserId();
@@ -42,5 +48,10 @@ public class PostResponseDto {
         this.content = post.getContent();
         this.category = post.getCategory();
         this.mainImg = post.getMainImg();
+        this.isActive = post.getIsActive();
+        this.userTitle = title;
+        this.email = email;
+        this.homePageUrl = homePageUrl;
+        this.github = github;
     }
 }

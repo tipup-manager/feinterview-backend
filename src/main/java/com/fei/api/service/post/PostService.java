@@ -6,6 +6,7 @@ import com.fei.api.domain.user.User;
 import com.fei.api.domain.user.UserRepository;
 import com.fei.api.web.dto.post.PostListResponseDto;
 import com.fei.api.web.dto.post.PostResponseDto;
+import com.fei.api.web.dto.post.PostResponseWithoutUserDto;
 import com.fei.api.web.dto.post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,6 +60,13 @@ public class PostService {
                 pageData.getTotalElements(),
                 pageData.getPageable().getPageNumber()
         );
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostResponseWithoutUserDto> getPostsByCategory(String category) {
+        List<PostResponseWithoutUserDto> pageData = postRepository.findPostsList(category)
+                .stream().map(PostResponseWithoutUserDto::new).collect(Collectors.toList());
+        return pageData;
     }
 
     @Transactional

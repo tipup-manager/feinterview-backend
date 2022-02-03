@@ -21,6 +21,11 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @GetMapping("/api/v1/blog/{userId}")
+    public UserResponseWithoutTokenDto getBlogUser(@PathVariable String userId) {
+        return userService.getBlogUser(userId);
+    }
+
     @PostMapping("/api/v1/user/signup")
     public UserResponseDto signup(@RequestBody UserSaveRequestDto requestDto) {
         return userService.signup(requestDto);

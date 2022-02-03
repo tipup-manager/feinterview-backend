@@ -3,6 +3,7 @@ package com.fei.api.web;
 import com.fei.api.service.post.PostService;
 import com.fei.api.web.dto.post.PostListResponseDto;
 import com.fei.api.web.dto.post.PostResponseDto;
+import com.fei.api.web.dto.post.PostResponseWithoutUserDto;
 import com.fei.api.web.dto.post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +31,11 @@ public class PostController {
         return postService.getPostByCategory(category, sortedByModifiedDateDesc);
     }
 
+    @GetMapping("/api/v1/post/categorys/{category}")
+    public List<PostResponseWithoutUserDto> getPostsByCategory(@PathVariable String category) {
+        return postService.getPostsByCategory(category);
+    }
+
     @PostMapping("/api/v1/post")
     public PostResponseDto save(@RequestBody PostSaveRequestDto requestDto) {
         return postService.save(requestDto);
@@ -37,13 +43,13 @@ public class PostController {
 
     @GetMapping("/api/v1/post/list")
     public PostListResponseDto getPosts(@RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("CREATED_DATE").descending());
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
         return postService.getPosts(sortedByModifiedDateDesc);
     }
 
     @GetMapping("/api/v1/post/list/{userNumberId}")
     public PostListResponseDto getPostsByUserNumberId(@PathVariable Long userNumberId, @RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("CREATED_DATE").descending());
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
         return postService.getPostsByUserNumberId(userNumberId, sortedByModifiedDateDesc);
     }
 

@@ -61,6 +61,16 @@ public class UserService {
         return new UserResponseDto(user,null);
     }
 
+    @Transactional
+    public UserResponseWithoutTokenDto getBlogUser(String userId) {
+        User user = userRepository.findByUserId(userId);
+        if(null == user) {
+            throw new RuntimeException("해당 아이디가 존재하지 않습니다.");
+        }
+
+        return new UserResponseWithoutTokenDto(user);
+    }
+
     public User getByCredentials(String loginType, String oauthId, PasswordEncoder encoder) {
         User originUser = null;
         if ("KAKAO".equals(loginType)) {

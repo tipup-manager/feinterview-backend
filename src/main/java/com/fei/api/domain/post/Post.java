@@ -46,6 +46,9 @@ public class Post extends BaseTimeEntity {
     private int price;
 
     @Column
+    private int commentCount;
+
+    @Column
     private String badges;
 
     @Column
@@ -71,7 +74,8 @@ public class Post extends BaseTimeEntity {
         String badges,
         String category,
         String mainImg,
-        String isActive
+        String isActive,
+        int commentCount
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -86,11 +90,19 @@ public class Post extends BaseTimeEntity {
         this.category = category;
         this.mainImg = mainImg;
         this.isActive = isActive;
+        this.commentCount = commentCount;
     }
 
     public Post update(Post post) {
         this.title = post.getTitle();
         this.content = post.getContent();
+        return this;
+    }
+
+    public Post starUpdate(int starCount, int commentCount, String starCountInfo) {
+        this.starCount = starCount;
+        this.commentCount = commentCount;
+        this.starCountInfo = starCountInfo;
         return this;
     }
 }

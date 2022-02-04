@@ -22,6 +22,7 @@ public class PostSaveRequestDto {
     private String category;
     private String mainImg;
     private String isActive;
+    private int commentCount;
 
     @Builder
     public PostSaveRequestDto(
@@ -37,7 +38,8 @@ public class PostSaveRequestDto {
             String badges,
             String category,
             String mainImg,
-            String isActive
+            String isActive,
+            int commentCount
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -52,6 +54,7 @@ public class PostSaveRequestDto {
         this.category = category;
         this.mainImg = mainImg;
         this.isActive = isActive;
+        this.commentCount = commentCount;
     }
 
     public Post toEntity() {
@@ -69,6 +72,7 @@ public class PostSaveRequestDto {
                 .category(category)
                 .mainImg(mainImg)
                 .isActive(isActive)
+                .commentCount(commentCount)
                 .build();
 
     }

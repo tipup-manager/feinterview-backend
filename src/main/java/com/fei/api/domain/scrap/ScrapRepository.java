@@ -11,4 +11,6 @@ public interface ScrapRepository extends JpaRepository<Scrap, Long> {
     Page<Scrap> findScrapList(Pageable pageable);
 
     Page<Scrap> findByUserNumberId(Long userNumberId, Pageable pageable);
+
+    Scrap findByUserNumberIdAndBlogId(Long userNumberId, Long blogId);
 }

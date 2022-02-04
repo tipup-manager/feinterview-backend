@@ -24,6 +24,10 @@ public class ScrapService {
         if (scrapSaveRequestDto == null || "".equals(scrapSaveRequestDto.getUserNumberId())) {
             throw new RuntimeException("Invalid argument");
         }
+        Scrap existScrap = scrapRepository.findByUserNumberIdAndBlogId(scrapSaveRequestDto.getUserNumberId(), scrapSaveRequestDto.getBlogId());
+        if (existScrap != null) {
+            throw new IllegalArgumentException("이미 스크랩된 포스트 입니다.");
+        }
         Scrap scrap = scrapRepository.save(scrapSaveRequestDto.toEntity());
         return new ScrapResponseDto(scrap);
     }

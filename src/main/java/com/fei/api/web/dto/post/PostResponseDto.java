@@ -30,6 +30,7 @@ public class PostResponseDto {
     private String email;
     private String homePageUrl;
     private String github;
+    private int commentCount;
 
 
     public PostResponseDto(Post post, String title, String email, String homePageUrl, String github) {
@@ -49,6 +50,7 @@ public class PostResponseDto {
         this.category = post.getCategory();
         this.mainImg = post.getMainImg();
         this.isActive = post.getIsActive();
+        this.commentCount = post.getCommentCount();
         this.userTitle = title;
         this.email = email;
         this.homePageUrl = homePageUrl;

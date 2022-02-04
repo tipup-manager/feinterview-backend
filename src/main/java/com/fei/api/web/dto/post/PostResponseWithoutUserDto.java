@@ -26,6 +26,7 @@ public class PostResponseWithoutUserDto {
     private String category;
     private String mainImg;
     private String isActive;
+    private int commentCount;
 
 
     public PostResponseWithoutUserDto(Post post) {
@@ -45,5 +46,6 @@ public class PostResponseWithoutUserDto {
         this.category = post.getCategory();
         this.mainImg = post.getMainImg();
         this.isActive = post.getIsActive();
+        this.commentCount = post.getCommentCount();
     }
 }

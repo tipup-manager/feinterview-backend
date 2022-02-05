@@ -1,9 +1,12 @@
 package com.fei.api.service.post;
 
+import com.fei.api.domain.comment.Comment;
+import com.fei.api.domain.comment.CommentRepository;
 import com.fei.api.domain.post.Post;
 import com.fei.api.domain.post.PostRepository;
 import com.fei.api.domain.user.User;
 import com.fei.api.domain.user.UserRepository;
+import com.fei.api.web.dto.comment.CommentListResponseDto;
 import com.fei.api.web.dto.post.PostListResponseDto;
 import com.fei.api.web.dto.post.PostResponseDto;
 import com.fei.api.web.dto.post.PostResponseWithoutUserDto;
@@ -11,7 +14,9 @@ import com.fei.api.web.dto.post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +30,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public PostResponseDto save(PostSaveRequestDto postSaveRequestDto) {
@@ -32,7 +38,7 @@ public class PostService {
             throw new RuntimeException("Invalid argument");
         }
         Post post = postRepository.save(postSaveRequestDto.toEntity());
-        return new PostResponseDto(post, null, null, null, null);
+        return new PostResponseDto(post, null, null, null, null, null);
     }
     @Transactional
     public PostResponseDto getPost(Long id) {
@@ -42,12 +48,19 @@ public class PostService {
         User user = userRepository.findById(post.getUserNumberId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 사용자가 없습니다.id="+id)
         );
+        Pageable sortedByModifiedDateDesc = PageRequest.of(0, 10, Sort.by("createdDate").descending());
+        Page<Comment> pageData = commentRepository.findByPostId(id, sortedByModifiedDateDesc);
         return new PostResponseDto(
             post,
             user.getTitle(),
             user.getEmail(),
             user.getHomePageUrl(),
-            user.getGithubUrl()
+            user.getGithubUrl(),
+            new CommentListResponseDto(
+                    pageData.getContent(),
+                    pageData.getTotalElements(),
+                    pageData.getPageable().getPageNumber()
+            )
         );
     }
 

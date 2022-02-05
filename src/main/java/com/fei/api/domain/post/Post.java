@@ -99,9 +99,9 @@ public class Post extends BaseTimeEntity {
         return this;
     }
 
-    public Post starUpdate(int starCount, int commentCount, String starCountInfo) {
+    public Post starUpdate(int starCount, String starCountInfo) {
         this.starCount = starCount;
-        this.commentCount = commentCount;
+        this.commentCount = this.commentCount + 1;
         this.starCountInfo = starCountInfo;
         return this;
     }

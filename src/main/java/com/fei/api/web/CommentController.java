@@ -1,15 +1,8 @@
 package com.fei.api.web;
 
 import com.fei.api.service.comment.CommentService;
-import com.fei.api.service.post.PostService;
 import com.fei.api.web.dto.comment.CommentListResponseDto;
-import com.fei.api.web.dto.comment.CommentResponseDto;
 import com.fei.api.web.dto.comment.CommentSaveRequestDto;
-import com.fei.api.web.dto.post.PostListResponseDto;
-import com.fei.api.web.dto.post.PostResponseDto;
-import com.fei.api.web.dto.post.PostResponseWithoutUserDto;
-import com.fei.api.web.dto.post.PostSaveRequestDto;
-import com.sun.xml.internal.rngom.ast.builder.CommentList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

@@ -1,6 +1,7 @@
 package com.fei.api.web.dto.post;
 
 import com.fei.api.domain.post.Post;
+import com.fei.api.web.dto.comment.CommentListResponseDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -31,9 +32,10 @@ public class PostResponseDto {
     private String homePageUrl;
     private String github;
     private int commentCount;
+    private CommentListResponseDto comment;
 
 
-    public PostResponseDto(Post post, String title, String email, String homePageUrl, String github) {
+    public PostResponseDto(Post post, String title, String email, String homePageUrl, String github, CommentListResponseDto comment) {
         this.createdDate = post.getCreatedDate();
         this.modifiedDate = post.getModifiedDate();
         this.userId = post.getUserId();
@@ -55,5 +57,6 @@ public class PostResponseDto {
         this.email = email;
         this.homePageUrl = homePageUrl;
         this.github = github;
+        this.comment = comment;
     }
 }

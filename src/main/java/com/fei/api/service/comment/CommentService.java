@@ -34,7 +34,8 @@ public class CommentService {
         Post post = postRepository.findById(commentSaveRequestDto.getPostId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 포스트가 없습니다.id="+commentSaveRequestDto.getPostId())
         );
-        post.starUpdate(0,0,"");
+        String starCount = getStarCountFactory(post.getStarCountInfo(), commentSaveRequestDto.getScore());
+        post.starUpdate(getStarAverage(starCount),starCount);
         commentRepository.save(commentSaveRequestDto.toEntity());
         Page<Comment> pageData = commentRepository.findByPostId(commentSaveRequestDto.getPostId(), sortedByModifiedDateDesc);
         return new CommentListResponseDto(
@@ -42,6 +43,28 @@ public class CommentService {
                 pageData.getTotalElements(),
                 pageData.getPageable().getPageNumber()
         );
+    }
+
+    public String getStarCountFactory(String starCount, int currentStar) {
+        String tempCount = starCount;
+        if (tempCount.indexOf("/") > -1) {
+            String[] starArry = tempCount.split("/");
+            int star = Integer.parseInt(starArry[0]) + currentStar;
+            int people = Integer.parseInt(starArry[1]) + 1;
+            tempCount = Integer.toString(star) + "/" + Integer.toString(people);
+        }
+        return tempCount;
+    }
+
+    public int getStarAverage(String starCount) {
+        int resultAverage = 0;
+        if (starCount.indexOf("/") > -1) {
+            String[] starArry = starCount.split("/");
+            int star = Integer.parseInt(starArry[0]);
+            int people = Integer.parseInt(starArry[1]);
+            resultAverage = Math.round(star/people);
+        }
+        return resultAverage;
     }
 
 

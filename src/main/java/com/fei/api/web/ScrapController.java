@@ -29,13 +29,13 @@ public class ScrapController {
 
     @GetMapping("/api/v1/scrap/list")
     public ScrapListResponseDto getScraps(@RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("CREATED_DATE").descending());
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
         return scrapService.getScraps(sortedByModifiedDateDesc);
     }
 
     @GetMapping("/api/v1/scrap/list/{userNumberId}")
     public ScrapListResponseDto getBlogsByUserNumberId(@PathVariable Long userNumberId, @RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("CREATED_DATE").descending());
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
         return scrapService.getScrapsByUserNumberId(userNumberId, sortedByModifiedDateDesc);
     }
 

@@ -1,6 +1,5 @@
 package com.fei.api.web.dto.recomment;
 
-import com.fei.api.domain.comment.Comment;
 import com.fei.api.domain.recomment.ReComment;
 import lombok.Builder;
 import lombok.Getter;

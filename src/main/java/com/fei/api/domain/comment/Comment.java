@@ -2,6 +2,7 @@ package com.fei.api.domain.comment;
 
 
 import com.fei.api.domain.BaseTimeEntity;
+import com.fei.api.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,9 @@ public class Comment extends BaseTimeEntity {
     @Column
     private int score;
 
+    @Column
+    private int recommentCount;
+
     @Builder
     public Comment(
         String userId,
@@ -42,7 +46,8 @@ public class Comment extends BaseTimeEntity {
         String userImg,
         int score,
         Long postId,
-        String comment
+        String comment,
+        int recommentCount
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -50,5 +55,16 @@ public class Comment extends BaseTimeEntity {
         this.score = score;
         this.postId = postId;
         this.comment = comment;
+        this.recommentCount = recommentCount;
+    }
+
+    public Comment updateRecommentCount() {
+        this.recommentCount = this.recommentCount + 1;
+        return this;
+    }
+
+    public Comment updateRemoveRecommentCount() {
+        this.recommentCount = this.recommentCount - 1;
+        return this;
     }
 }

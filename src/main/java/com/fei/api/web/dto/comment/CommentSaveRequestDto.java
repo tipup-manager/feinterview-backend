@@ -18,6 +18,7 @@ public class CommentSaveRequestDto {
     private String comment;
     private String userImg;
     private int score;
+    private int recommentCount;
 
     @Builder
     public CommentSaveRequestDto(
@@ -25,8 +26,9 @@ public class CommentSaveRequestDto {
             Long userNumberId,
             String userImg,
             int score,
-            Long blogId,
-            String comment
+            Long postId,
+            String comment,
+            int recommentCount
     ) {
         this.userId = userId;
         this.userNumberId = userNumberId;
@@ -34,6 +36,7 @@ public class CommentSaveRequestDto {
         this.score = score;
         this.postId = postId;
         this.comment = comment;
+        this.recommentCount = recommentCount;
     }
 
 

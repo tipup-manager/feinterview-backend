@@ -29,8 +29,7 @@ public class ReCommentController {
 
 
     @DeleteMapping("/api/v1/recomment/{id}")
-    public Long delete(@PathVariable Long id){
-        reCommentService.delete(id);
-        return id;
+    public ReCommentListResponseDto delete(@PathVariable Long id){
+        return reCommentService.delete(id);
     }
 }

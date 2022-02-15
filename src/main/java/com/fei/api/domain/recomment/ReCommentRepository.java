@@ -8,4 +8,6 @@ public interface ReCommentRepository extends JpaRepository<ReComment, Long> {
 
     Page<ReComment> findByCommentId(Long commentId, Pageable pageable);
 
+    Long deleteByCommentId(Long commentId);
+
 }

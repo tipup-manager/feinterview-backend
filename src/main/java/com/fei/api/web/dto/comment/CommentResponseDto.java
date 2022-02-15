@@ -20,6 +20,7 @@ public class CommentResponseDto {
     private String comment;
     private String userImg;
     private int score;
+    private int recommentCount;
 
 
     public CommentResponseDto(Comment comment) {
@@ -32,5 +33,6 @@ public class CommentResponseDto {
         this.score = comment.getScore();
         this.postId = comment.getPostId();
         this.comment = comment.getComment();
+        this.recommentCount = comment.getRecommentCount();
     }
 }

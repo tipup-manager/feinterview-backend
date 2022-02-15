@@ -4,6 +4,7 @@ import com.fei.api.domain.comment.Comment;
 import com.fei.api.domain.comment.CommentRepository;
 import com.fei.api.domain.post.Post;
 import com.fei.api.domain.post.PostRepository;
+import com.fei.api.domain.recomment.ReCommentRepository;
 import com.fei.api.web.dto.comment.CommentListResponseDto;
 import com.fei.api.web.dto.comment.CommentResponseDto;
 import com.fei.api.web.dto.comment.CommentSaveRequestDto;
@@ -24,6 +25,7 @@ public class CommentService {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final ReCommentRepository reCommentRepository;
 
     @Transactional
     public CommentListResponseDto save(CommentSaveRequestDto commentSaveRequestDto) {
@@ -80,10 +82,19 @@ public class CommentService {
 
 
     @Transactional
-    public void delete(Long id){
+    public CommentListResponseDto delete(Long id){
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 블로그가 없습니다. id="+id));
-
+                .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
+        long postId = comment.getPostId();
         commentRepository.delete(comment);
+        reCommentRepository.deleteByCommentId(id);
+
+        Pageable sortedByModifiedDateDesc = PageRequest.of(0, 10, Sort.by("createdDate").descending());
+        Page<Comment> pageData = commentRepository.findByPostId(postId, sortedByModifiedDateDesc);
+        return new CommentListResponseDto(
+                pageData.getContent(),
+                pageData.getTotalElements(),
+                pageData.getPageable().getPageNumber()
+        );
     }
 }

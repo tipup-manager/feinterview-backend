@@ -51,4 +51,5 @@ public class ReComment extends BaseTimeEntity {
         this.comment = comment;
         this.commentId = commentId;
     }
+
 }

@@ -38,6 +38,7 @@ public class ReCommentService {
         Comment comment = commentRepository.findById(reCommentSaveRequestDto.getCommentId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 댓글이 없습니다.id="+reCommentSaveRequestDto.getCommentId())
         );
+        comment.updateRecommentCount();
         reCommentRepository.save(reCommentSaveRequestDto.toEntity());
         Page<ReComment> pageData = reCommentRepository.findByCommentId(reCommentSaveRequestDto.getCommentId(), sortedByModifiedDateDesc);
         return new ReCommentListResponseDto(
@@ -60,10 +61,21 @@ public class ReCommentService {
 
 
     @Transactional
-    public void delete(Long id){
+    public ReCommentListResponseDto delete(Long id){
         ReComment recomment = reCommentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 답글이 없습니다. id="+id));
-
+        long commentId = recomment.getCommentId();
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new IllegalArgumentException("해당 댓글이 없습니다.id="+commentId)
+        );
+        comment.updateRemoveRecommentCount();
         reCommentRepository.delete(recomment);
+        Pageable sortedByModifiedDateDesc = PageRequest.of(0, 10, Sort.by("createdDate").descending());
+        Page<ReComment> pageData = reCommentRepository.findByCommentId(commentId, sortedByModifiedDateDesc);
+        return new ReCommentListResponseDto(
+                pageData.getContent(),
+                pageData.getTotalElements(),
+                pageData.getPageable().getPageNumber()
+        );
     }
 }

@@ -26,14 +26,9 @@ public class PostController {
     }
 
     @GetMapping("/api/v1/post/category/{category}")
-    public PostListResponseDto getPostByCategory(@PathVariable String category, @RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
+    public PostListResponseDto getPostByCategory(@PathVariable String category, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, size, Sort.by("createdDate").descending());
         return postService.getPostByCategory(category, sortedByModifiedDateDesc);
-    }
-
-    @GetMapping("/api/v1/post/categorys/{category}")
-    public List<PostResponseWithoutUserDto> getPostsByCategory(@PathVariable String category) {
-        return postService.getPostsByCategory(category);
     }
 
     @PostMapping("/api/v1/post")
@@ -43,13 +38,13 @@ public class PostController {
 
     @GetMapping("/api/v1/post/list")
     public PostListResponseDto getPosts(@RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 12, Sort.by("CREATED_DATE").descending());
         return postService.getPosts(sortedByModifiedDateDesc);
     }
 
     @GetMapping("/api/v1/post/list/{userNumberId}")
-    public PostListResponseDto getPostsByUserNumberId(@PathVariable Long userNumberId, @RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
+    public PostListResponseDto getPostsByUserNumberId(@PathVariable Long userNumberId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, size, Sort.by("createdDate").descending());
         return postService.getPostsByUserNumberId(userNumberId, sortedByModifiedDateDesc);
     }
 

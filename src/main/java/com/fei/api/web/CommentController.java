@@ -16,10 +16,10 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/api/v1/comment/{blogId}")
-    public CommentListResponseDto getCommentByBlogId(@PathVariable Long blogId, @RequestParam(defaultValue = "0") int page) {
+    @GetMapping("/api/v1/comment/{postId}")
+    public CommentListResponseDto getCommentByBlogId(@PathVariable Long postId, @RequestParam(defaultValue = "0") int page) {
         Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
-        return commentService.getCommentByBlogId(blogId, sortedByModifiedDateDesc);
+        return commentService.getCommentByBlogId(postId, sortedByModifiedDateDesc);
     }
 
     @PostMapping("/api/v1/comment")

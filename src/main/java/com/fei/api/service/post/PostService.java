@@ -75,13 +75,6 @@ public class PostService {
         );
     }
 
-    @Transactional(readOnly = true)
-    public List<PostResponseWithoutUserDto> getPostsByCategory(String category) {
-        List<PostResponseWithoutUserDto> pageData = postRepository.findPostsList(category)
-                .stream().map(PostResponseWithoutUserDto::new).collect(Collectors.toList());
-        return pageData;
-    }
-
     @Transactional
     public PostListResponseDto getPosts(Pageable pageable) {
         Page<Post> pageData = postRepository.findPostList(pageable);

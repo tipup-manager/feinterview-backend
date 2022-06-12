@@ -35,7 +35,24 @@ public class UserService {
             throw new RuntimeException("ID already exists");
         }
         String encodedPassword = passwordEncoder.encode(userSaveRequestDto.getPw());
-        User saveUser = userRepository.save(userSaveRequestDto.toEntity());
+        UserSaveRequestDto withPw = new UserSaveRequestDto(
+                userSaveRequestDto.getUserId(),
+                encodedPassword,
+                userSaveRequestDto.getRole(),
+                userSaveRequestDto.getEmail(),
+                userSaveRequestDto.getLanguage(),
+                userSaveRequestDto.getHomePageUrl(),
+                userSaveRequestDto.getGithubUrl(),
+                userSaveRequestDto.getCareer(),
+                userSaveRequestDto.getSignupMethod(),
+                userSaveRequestDto.getUserImg(),
+                userSaveRequestDto.getTitle(),
+                userSaveRequestDto.getContent(),
+                userSaveRequestDto.getIssueCount(),
+                userSaveRequestDto.getOauthId()
+        );
+
+        User saveUser = userRepository.save(withPw.toEntity());
         String token = tokenProvider.create(saveUser);
         return new UserResponseDto(
                 saveUser,

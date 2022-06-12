@@ -37,8 +37,8 @@ public class PostController {
     }
 
     @GetMapping("/api/v1/post/list")
-    public PostListResponseDto getPosts(@RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 12, Sort.by("CREATED_DATE").descending());
+    public PostListResponseDto getPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "0") int size) {
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, size, Sort.by("CREATED_DATE").descending());
         return postService.getPosts(sortedByModifiedDateDesc);
     }
 

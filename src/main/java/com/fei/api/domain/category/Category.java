@@ -18,27 +18,32 @@ public class Category extends BaseTimeEntity {
     private Long id;
 
     @Column
-    private String type;
+    private String typeNumber;
 
     @Column
-    private String krName;
+    private String typeName;
 
     @Column
-    private String enName;
+    private String name;
+
+    @Column
+    private String img;
 
     @Column
     private Long index;
 
     @Builder
     public Category(
-        String type,
-        String krName,
-        String enName,
+        String typeNumber,
+        String typeName,
+        String name,
+        String img,
         Long index
     ) {
-        this.type = type;
-        this.krName = krName;
-        this.enName = enName;
+        this.typeNumber = typeNumber;
+        this.typeName = typeName;
+        this.name = name;
+        this.img = img;
         this.index = index;
     }
 }

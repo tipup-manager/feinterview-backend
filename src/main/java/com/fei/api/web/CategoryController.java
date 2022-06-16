@@ -17,9 +17,9 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/api/v1/category")
-    public CategoryListResponseDto getCategory(@PathVariable Long postId, @RequestParam(defaultValue = "0") int page) {
-        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("createdDate").descending());
-        return categoryService.getCategory(postId, sortedByModifiedDateDesc);
+    public CategoryListResponseDto getCategory(@RequestParam(defaultValue = "0") int page) {
+        Pageable sortedByModifiedDateDesc = PageRequest.of(page, 10, Sort.by("CREATED_DATE").descending());
+        return categoryService.getCategory(sortedByModifiedDateDesc);
     }
 
     @PostMapping("/api/v1/category")

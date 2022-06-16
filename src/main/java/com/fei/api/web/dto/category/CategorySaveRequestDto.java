@@ -9,30 +9,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CategorySaveRequestDto {
 
-    private String type;
-    private String krName;
-    private String enName;
+    private String typeName;
+    private String typeNumber;
+    private String name;
+    private String img;
     private Long index;
 
     @Builder
     public CategorySaveRequestDto(
-            String type,
-            String krName,
-            String enName,
+            String typeName,
+            String typeNumber,
+            String img,
+            String name,
             Long index
     ) {
-        this.type = type;
-        this.krName = krName;
-        this.enName = enName;
+        this.typeName = typeName;
+        this.typeNumber = typeNumber;
+        this.img = img;
+        this.name = name;
         this.index = index;
     }
 
 
     public Category toEntity() {
         return Category.builder()
-                .type(type)
-                .enName(enName)
-                .krName(krName)
+                .typeName(typeName)
+                .typeNumber(typeNumber)
+                .img(img)
+                .name(name)
                 .index(index)
                 .build();
 

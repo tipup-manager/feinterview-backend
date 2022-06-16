@@ -13,9 +13,10 @@ public class CategoryResponseDto {
     private LocalDateTime modifiedDate;
     private LocalDateTime createdDate;
     private final Long id;
-    private String type;
-    private String krName;
-    private String enName;
+    private String typeName;
+    private String typeNumber;
+    private String name;
+    private String img;
     private Long index;
 
 
@@ -23,9 +24,10 @@ public class CategoryResponseDto {
         this.createdDate = category.getCreatedDate();
         this.modifiedDate = category.getModifiedDate();
         this.id = category.getId();
-        this.type = category.getType();
-        this.krName = category.getKrName();
-        this.enName = category.getEnName();
+        this.img = category.getImg();
+        this.typeName = category.getTypeName();
+        this.typeNumber = category.getTypeNumber();
+        this.name = category.getName();
         this.index = category.getIndex();
     }
 }

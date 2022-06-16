@@ -25,7 +25,7 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public CategoryListResponseDto getCategory(Long categoryId, Pageable pageable) {
+    public CategoryListResponseDto getCategory(Pageable pageable) {
         Page<Category> pageData = categoryRepository.findCategoryList(pageable);
         return new CategoryListResponseDto(
                 pageData.getContent(),

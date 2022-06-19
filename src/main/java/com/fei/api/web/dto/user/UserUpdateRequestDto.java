@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 public class UserUpdateRequestDto {
 
    private String email;
-   private String language;
+   private String languageNumber;
+   private String languageName;
    private String homePageUrl;
    private String githubUrl;
    private int career;
@@ -22,7 +23,8 @@ public class UserUpdateRequestDto {
     @Builder
     public UserUpdateRequestDto(
             String email,
-            String language,
+            String languageNumber,
+            String languageName,
             String homePageUrl,
             String githubUrl,
             int career,
@@ -32,7 +34,8 @@ public class UserUpdateRequestDto {
             int issueCount
     ) {
         this.email = email;
-        this.language = language;
+        this.languageNumber = languageNumber;
+        this.languageName = languageName;
         this.homePageUrl = homePageUrl;
         this.githubUrl = githubUrl;
         this.career = career;
@@ -51,7 +54,8 @@ public class UserUpdateRequestDto {
                 .githubUrl(githubUrl)
                 .homePageUrl(homePageUrl)
                 .issueCount(issueCount)
-                .language(language)
+                .languageNumber(languageNumber)
+                .languageName(languageName)
                 .userImg(userImg)
                 .build();
 

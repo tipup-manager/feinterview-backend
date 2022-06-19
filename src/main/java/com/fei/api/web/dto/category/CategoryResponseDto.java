@@ -18,9 +18,11 @@ public class CategoryResponseDto {
     private String name;
     private String img;
     private Long index;
+    private Long key;
 
 
     public CategoryResponseDto(Category category) {
+        this.key = category.getKey();
         this.createdDate = category.getCreatedDate();
         this.modifiedDate = category.getModifiedDate();
         this.id = category.getId();

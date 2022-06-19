@@ -39,7 +39,10 @@ public class User extends BaseTimeEntity {
     private int career;
 
     @Column
-    private String language;
+    private String languageNumber;
+
+    @Column
+    private String languageName;
 
     @Column
     private String signupMethod;
@@ -65,7 +68,8 @@ public class User extends BaseTimeEntity {
         String pw,
         String role,
         String email,
-        String language,
+        String languageNumber,
+        String languageName,
         String homePageUrl,
         String githubUrl,
         int career,
@@ -80,7 +84,8 @@ public class User extends BaseTimeEntity {
         this.pw = pw;
         this.role = role;
         this.email = email;
-        this.language = language;
+        this.languageNumber = languageNumber;
+        this.languageName = languageName;
         this.homePageUrl = homePageUrl;
         this.githubUrl = githubUrl;
         this.career = career;
@@ -94,7 +99,8 @@ public class User extends BaseTimeEntity {
 
     public User update(User user) {
         this.email = user.getEmail();
-        this.language = user.getLanguage();
+        this.languageNumber = user.getLanguageNumber();
+        this.languageName = user.getLanguageName();
         this.homePageUrl = user.getHomePageUrl();
         this.githubUrl = user.getGithubUrl();
         this.career = user.getCareer();

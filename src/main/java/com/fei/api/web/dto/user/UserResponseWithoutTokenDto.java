@@ -16,7 +16,8 @@ public class UserResponseWithoutTokenDto {
     private final String userId;
     private final String role;
     private String email;
-    private String language;
+    private String languageNumber;
+    private String languageName;
     private String homePageUrl;
     private String githubUrl;
     private int career;
@@ -33,7 +34,8 @@ public class UserResponseWithoutTokenDto {
         this.userId = user.getUserId();
         this.role = user.getRole();
         this.email = user.getEmail();
-        this.language = user.getLanguage();
+        this.languageNumber = user.getLanguageNumber();
+        this.languageName = user.getLanguageName();
         this.homePageUrl = user.getHomePageUrl();
         this.githubUrl = user.getGithubUrl();
         this.career = user.getCareer();

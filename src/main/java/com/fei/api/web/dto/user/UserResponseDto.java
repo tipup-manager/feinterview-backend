@@ -17,7 +17,8 @@ public class UserResponseDto {
     private final String userId;
     private final String role;
     private String email;
-    private String language;
+    private String languageNumber;
+    private String languageName;
     private String homePageUrl;
     private String githubUrl;
     private int career;
@@ -35,7 +36,8 @@ public class UserResponseDto {
         this.token = token;
         this.role = user.getRole();
         this.email = user.getEmail();
-        this.language = user.getLanguage();
+        this.languageName = user.getLanguageName();
+        this.languageNumber = user.getLanguageNumber();
         this.homePageUrl = user.getHomePageUrl();
         this.githubUrl = user.getGithubUrl();
         this.career = user.getCareer();

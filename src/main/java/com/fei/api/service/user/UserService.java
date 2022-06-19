@@ -3,6 +3,8 @@ package com.fei.api.service.user;
 import com.fei.api.domain.user.User;
 import com.fei.api.domain.user.UserRepository;
 import com.fei.api.security.TokenProvider;
+import com.fei.api.service.language.LanguageService;
+import com.fei.api.web.dto.language.LanguageInfoSaveRequestDto;
 import com.fei.api.web.dto.user.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,8 @@ public class UserService {
 
     private final TokenProvider tokenProvider;
 
+    private final LanguageService languageService;
+
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Transactional
@@ -40,7 +44,8 @@ public class UserService {
                 encodedPassword,
                 userSaveRequestDto.getRole(),
                 userSaveRequestDto.getEmail(),
-                userSaveRequestDto.getLanguage(),
+                userSaveRequestDto.getLanguageNumber(),
+                userSaveRequestDto.getLanguageName(),
                 userSaveRequestDto.getHomePageUrl(),
                 userSaveRequestDto.getGithubUrl(),
                 userSaveRequestDto.getCareer(),
@@ -53,6 +58,17 @@ public class UserService {
         );
 
         User saveUser = userRepository.save(withPw.toEntity());
+
+        languageService.save(new LanguageInfoSaveRequestDto(
+                saveUser.getId(),
+                userSaveRequestDto.getEmail(),
+                userSaveRequestDto.getUserImg(),
+                userSaveRequestDto.getLanguageName(),
+                userSaveRequestDto.getUserId(),
+                userSaveRequestDto.getLanguageNumber(),
+                userSaveRequestDto.getHomePageUrl()
+        ));
+
         String token = tokenProvider.create(saveUser);
         return new UserResponseDto(
                 saveUser,
@@ -120,6 +136,16 @@ public class UserService {
     public UserResponseWithoutTokenDto update(Long id, UserUpdateRequestDto requestDto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id="+id));
+
+        languageService.modifySave(new LanguageInfoSaveRequestDto(
+                user.getId(),
+                user.getEmail(),
+                user.getUserImg(),
+                requestDto.getLanguageName(),
+                user.getUserId(),
+                requestDto.getLanguageNumber(),
+                user.getHomePageUrl()
+        ));
 
         return new UserResponseWithoutTokenDto(user.update(requestDto.toEntity()));
     }

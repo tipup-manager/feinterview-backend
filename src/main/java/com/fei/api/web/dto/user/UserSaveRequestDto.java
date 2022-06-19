@@ -13,7 +13,8 @@ public class UserSaveRequestDto {
    private String pw;
    private String role;
    private String email;
-   private String language;
+   private String languageNumber;
+    private String languageName;
    private String homePageUrl;
    private String githubUrl;
    private int career;
@@ -30,7 +31,8 @@ public class UserSaveRequestDto {
             String pw,
             String role,
             String email,
-            String language,
+            String languageNumber,
+            String languageName,
             String homePageUrl,
             String githubUrl,
             int career,
@@ -45,7 +47,8 @@ public class UserSaveRequestDto {
         this.pw = pw;
         this.role = role;
         this.email = email;
-        this.language = language;
+        this.languageNumber = languageNumber;
+        this.languageName = languageName;
         this.homePageUrl = homePageUrl;
         this.githubUrl = githubUrl;
         this.career = career;
@@ -69,7 +72,8 @@ public class UserSaveRequestDto {
                 .githubUrl(githubUrl)
                 .homePageUrl(homePageUrl)
                 .issueCount(issueCount)
-                .language(language)
+                .languageNumber(languageNumber)
+                .languageName(languageName)
                 .signupMethod(signupMethod)
                 .userImg(userImg)
                 .oauthId(oauthId)

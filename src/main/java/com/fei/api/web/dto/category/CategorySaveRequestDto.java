@@ -14,15 +14,18 @@ public class CategorySaveRequestDto {
     private String name;
     private String img;
     private Long index;
+    private Long key;
 
     @Builder
     public CategorySaveRequestDto(
+            Long key,
             String typeName,
             String typeNumber,
             String img,
             String name,
             Long index
     ) {
+        this.key = key;
         this.typeName = typeName;
         this.typeNumber = typeNumber;
         this.img = img;
@@ -33,6 +36,7 @@ public class CategorySaveRequestDto {
 
     public Category toEntity() {
         return Category.builder()
+                .key(key)
                 .typeName(typeName)
                 .typeNumber(typeNumber)
                 .img(img)
